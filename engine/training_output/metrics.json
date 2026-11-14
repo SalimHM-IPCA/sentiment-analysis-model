@@ -5,7 +5,8 @@
     "dataset_sha256": "1ade4a4a453e880c0f39d0536d2b355e8a716e0cf88236c64cdb4d438cf9605b",
     "targets": [
       "valence",
-      "activity"
+      "activity",
+      "dominance"
     ],
     "normalisation": "(EmoBank score - 3) / 2",
     "max_seq_length": 128,
@@ -271,7 +272,11 @@
           "mae": 0.08472486178981953,
           "pearson": 0.5128292224472655
         },
-        "mean_mae": 0.08837825791415499
+        "dominance": {
+          "mae": 0.07416320362198048,
+          "pearson": 0.3243669087842408
+        },
+        "mean_mae": 0.08363990648343012
       }
     },
     {
@@ -285,7 +290,11 @@
           "mae": 0.0841565846493611,
           "pearson": 0.5175051154511162
         },
-        "mean_mae": 0.08790458653301768
+        "dominance": {
+          "mae": 0.07373912586279406,
+          "pearson": 0.32875698066150816
+        },
+        "mean_mae": 0.08318276630960976
       }
     },
     {
@@ -299,7 +308,11 @@
           "mae": 0.08209578759089496,
           "pearson": 0.5358121917121385
         },
-        "mean_mae": 0.08632634120614104
+        "dominance": {
+          "mae": 0.07206165798000802,
+          "pearson": 0.3458053995128135
+        },
+        "mean_mae": 0.08157144679742999
       }
     },
     {
@@ -313,7 +326,11 @@
           "mae": 0.08140607380141052,
           "pearson": 0.5453917728260157
         },
-        "mean_mae": 0.08593450523733329
+        "dominance": {
+          "mae": 0.07028471994931118,
+          "pearson": 0.35842107382647925
+        },
+        "mean_mae": 0.08071791014132589
       }
     }
   ],
@@ -326,7 +343,11 @@
       "mae": 0.0829647283322889,
       "pearson": 0.4860211093007359
     },
-    "mean_mae": 0.08809239170078287
+    "dominance": {
+      "mae": 0.07137301941273146,
+      "pearson": 0.43457346810925424
+    },
+    "mean_mae": 0.08251926760476568
   },
   "test_train_mean_baseline": {
     "valence": {
@@ -337,7 +358,11 @@
       "mae": 0.09451735859019209,
       "pearson": null
     },
-    "mean_mae": 0.10846382084462092
+    "dominance": {
+      "mae": 0.07831093745693102,
+      "pearson": null
+    },
+    "mean_mae": 0.09841285971539084
   },
   "note": "Metrics use [-1,1] targets and clipped predictions. Pearson null means undefined. Test must not be used to tune alpha."
 }

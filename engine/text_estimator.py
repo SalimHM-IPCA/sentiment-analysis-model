@@ -70,8 +70,8 @@ class TextEstimator:
         bundle = joblib.load(bundle_path)
         self.regressor = bundle["regressor"]
         self.metadata = bundle["metadata"]
-        if self.metadata.get("targets") != ["valence", "activity"]:
-            raise ValueError("The regressor must predict valence, then activity.")
+        if self.metadata.get("targets") != ["valence", "activity", "dominance"]:
+            raise ValueError("The regressor must predict valence, activity, then dominance.")
         if self.metadata.get("prediction_clip") != [-1, 1]:
             raise ValueError("Unexpected prediction clipping settings.")
         if self.metadata.get("normalisation") != "(EmoBank score - 3) / 2":
@@ -108,11 +108,12 @@ class TextEstimator:
         if vector.shape != (1, 768) or not np.isfinite(vector).all():
             raise ValueError("The encoder returned invalid embeddings.")
         prediction = np.asarray(self.regressor.predict(vector))
-        if prediction.shape != (1, 2) or not np.isfinite(prediction).all():
+        if prediction.shape != (1, 3) or not np.isfinite(prediction).all():
             raise ValueError("The regressor returned invalid predictions.")
-        valence, activity = np.clip(prediction[0], -1.0, 1.0)
+        valence, activity, dominance = np.clip(prediction[0], -1.0, 1.0)
         return {
             "raw_valence": float(valence), "raw_activity": float(activity),
+            "raw_dominance": float(dominance),
             "flags": ["possible_sarcasm"] if possible_sarcasm(text) else [],
         }
 

@@ -1,4 +1,4 @@
-"""Frozen local DistilBERT embeddings + Ridge for EmoBank V/A.
+"""Frozen local DistilBERT embeddings + Ridge for EmoBank V/A/D.
 Run from project root: python -u engine/train_regressor.py
 """
 import csv
@@ -24,8 +24,8 @@ def save_json(path, value):
 def load_data(path):
     with path.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
-        if not {"id", "split", "V", "A", "text"} <= set(reader.fieldnames or []):
-            raise ValueError("CSV must contain id, split, V, A, text")
+        if not {"id", "split", "V", "A", "D", "text"} <= set(reader.fieldnames or []):
+            raise ValueError("CSV must contain id, split, V, A, D, text")
         rows = list(reader)
     ids = set()
     groups = {s: [] for s in ("train", "dev", "test")}
@@ -35,9 +35,9 @@ def load_data(path):
         ids.add(row["id"])
         if row["split"] not in groups or not row["text"].strip():
             raise ValueError("Invalid split or empty text: " + row["id"])
-        values = np.array([float(row["V"]), float(row["A"])])
+        values = np.array([float(row["V"]), float(row["A"]), float(row["D"])])
         if not np.all(np.isfinite(values)) or np.any((values < 1) | (values > 5)):
-            raise ValueError("V/A must be finite and in [1,5]: " + row["id"])
+            raise ValueError("V/A/D must be finite and in [1,5]: " + row["id"])
         groups[row["split"]].append(row)
     # Keep within-split repetitions; remove exact text overlap across splits.
     seen = set()
@@ -61,12 +61,12 @@ def load_data(path):
 
 
 def targets(rows):
-    return (np.array([[float(r["V"]), float(r["A"])] for r in rows]) - 3.0) / 2.0
+    return (np.array([[float(r["V"]), float(r["A"]), float(r["D"])] for r in rows]) - 3.0) / 2.0
 
 
 def metrics(actual, predicted):
     result = {}
-    for i, name in enumerate(("valence", "activity")):
+    for i, name in enumerate(("valence", "activity", "dominance")):
         a, p = actual[:, i], predicted[:, i]
         correlation = None
         if len(a) > 1 and np.std(a) > 1e-12 and np.std(p) > 1e-12:
@@ -164,7 +164,7 @@ def main():
     baseline = np.tile(y["train"].mean(axis=0), (len(y["test"]), 1))
     metadata = {"encoder": "distilbert/distilbert-base-uncased + saved pooling",
         "model_sha256": fingerprint, "dataset_sha256": hashlib.sha256(data_path.read_bytes()).hexdigest(),
-        "targets": ["valence", "activity"], "normalisation": "(EmoBank score - 3) / 2",
+        "targets": ["valence", "activity", "dominance"], "normalisation": "(EmoBank score - 3) / 2",
         "max_seq_length": 128, "normalize_embeddings": False,
         "selected_alpha": float(best.alpha), "prediction_clip": [-1, 1],
         "training": "frozen encoder; Ridge fit on train only; alpha chosen using dev mean MAE",
@@ -179,7 +179,8 @@ def main():
     save_json(output / "metrics.json", report)
     with (output / "test_predictions.csv").open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["id", "text", "true_valence", "true_activity", "pred_valence", "pred_activity"])
+        writer.writerow(["id", "text", "true_valence", "true_activity", "true_dominance",
+                         "pred_valence", "pred_activity", "pred_dominance"])
         for row, actual, pred in zip(rows["test"], y["test"], prediction):
             writer.writerow([row["id"], row["text"], *actual, *pred])
     print("\nTest results:", json.dumps(report["test"], indent=2), flush=True)
