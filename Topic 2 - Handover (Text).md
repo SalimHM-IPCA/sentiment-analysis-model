@@ -33,7 +33,7 @@ Topic 2 does not choose actions or replies.
 | `engine/affective_state.py` | Topic 2 | rewritten (v2) | Map rescaling, Kalman state tracker, label rules, label probabilities, confidence |
 | `engine/calibrate_affect.py` | Topic 2 | new | Recomputes every constant of `affective_state.py` from held-out EmoBank predictions |
 | `engine/text_estimator.py` | Topic 1 | input to Topic 2 | Provides raw valence, activity and dominance per message (see the Topic 1 handover) |
-| `engine/engine.py` | Topic 3 | unchanged by Topic 2 | Calls `AffectiveState.update()` and builds the final output |
+| `engine/engine.py` | Topic 3 | one line added by Topic 2 (passes `audio_path`, see the voice handover) | Calls `AffectiveState.update()` and builds the final output |
 
 ---
 
@@ -284,7 +284,7 @@ v2 per emotion: neutral 5/5, joy 5/5, anger 5/5, frustration 4/5 (1 → sadness)
 ## 13. Known limitations
 
 1. **Perception limits everything downstream.** The text model correlates 0.69 / 0.49 / 0.43 with human ratings; a single message gives roughly 50–60% label certainty, which the confidence values honestly reflect.
-2. **Sadness and fear are weakly separated.** Only clearly powerless messages reach `sadness` (2/5 probes); fear has no label of its own. Voice is expected to help, as prosody carries activity better than text.
+2. **Sadness and fear are weakly separated.** Only clearly powerless messages reach `sadness` (2/5 probes); fear has no label of its own. When a recording is attached, the voice channel adds its own dominance and activity evidence (see the voice handover).
 3. **Calm messages with little positive wording** are labelled `neutral` (2/5 calm probes).
 4. **Independence assumption.** Label probabilities treat the three error dimensions as independent; valence–dominance errors correlate at 0.35.
 5. **Calibration on the test split.** Constants were measured on EmoBank's test split because only its predictions are saved. Topic 2 is not evaluated on EmoBank, so this does not bias the reported results, but a development split would be methodologically cleaner.

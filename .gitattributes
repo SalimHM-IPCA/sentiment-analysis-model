@@ -1,0 +1,3 @@
+# Model and data files are checked by hash at load time: git must never convert their line endings.
+engine/models/** -text
+engine/data/** -text
