@@ -31,13 +31,19 @@ python run_scenario.py scenarios/mandatory/M3_explicit_requests.json   # mandato
 python run_scenario.py scenarios/mandatory/M4_ambiguity_and_robustness.json # mandatory scenario 4
 ```
 
+## Voice (optional channel)
+
+In the interface, type a message, click **Audio (optional)...**, choose a WAV file (for example from
+`assets/audio/`), then press **Send**. The estimate combines text and voice; the voice-only reading is in the
+session log under `voice`. The first message with audio takes a few seconds while the voice model loads.
+
 ## Test
 
 ```bash
-python tests/test_contract.py
+python -m unittest discover tests
 ```
 
-Expected output: `Ran 3 tests ... OK`
+Expected output: `Ran 15 tests ... OK` (the voice engine tests are skipped if the voice model weights are missing).
 
 ## Session logs
 
