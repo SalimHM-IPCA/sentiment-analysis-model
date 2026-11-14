@@ -58,6 +58,9 @@ def label_probabilities(valence, activity, dominance, sd_v, sd_a, sd_d):
 class AffectiveState:
     """Tracks valence, activity and dominance over a conversation with a per-dimension Kalman filter."""
 
+    def __init__(self):
+        self._voice = None
+
     def reset(self):
         self.state = [0.0, 0.0, 0.0]
         self.variance = [s ** 2 for s in PRIOR_STD]
@@ -70,14 +73,15 @@ class AffectiveState:
             noise *= SARCASM_NOISE
         return noise
 
-    def _kalman_step(self, observation, noise):
-        # Process noise chosen so a normal message settles at TARGET_GAIN weight.
+    def _kalman_step(self, observation, sigma, noise, new_message=True):
+        # Process noise chosen so a normal text message settles at TARGET_GAIN weight. A second channel of the
+        # same message (voice) is a further measurement of the same moment, so no process noise is added.
         process_factor = TARGET_GAIN ** 2 / (1.0 - TARGET_GAIN)
         gains = []
         for i in range(3):
-            measurement_var = SIGMA[i] ** 2 * noise
+            measurement_var = sigma[i] ** 2 * noise[i]
             predicted_var = self.variance[i]
-            if self.message_count:
+            if new_message and self.message_count:
                 predicted_var += process_factor * SIGMA[i] ** 2
             gain = predicted_var / (predicted_var + measurement_var)
             self.state[i] += gain * (observation[i] - self.state[i])
@@ -86,32 +90,64 @@ class AffectiveState:
         return gains
 
     @staticmethod
-    def _cap_confidence(confidence, word_count, flags):
-        if word_count <= 2:
+    def _cap_confidence(confidence, word_count, flags, voice_noise=None):
+        # Short-text caps only apply when the text is the only evidence for this message.
+        if voice_noise is None and word_count <= 2:
             confidence = min(confidence, 0.35)
-        elif word_count <= 5:
+        elif voice_noise is None and word_count <= 5:
             confidence = min(confidence, 0.65)
+        if voice_noise is not None:
+            # Rule-based quality penalty: a noisy recording is weaker evidence, so confidence drops with it.
+            confidence /= math.sqrt(sum(voice_noise) / len(voice_noise))
         if "possible_sarcasm" in flags:
             confidence -= 0.2
         return max(0.1, min(0.95, confidence))
 
-    def update(self, text, raw):
-        flags = raw.get("flags", [])
+    def _voice_step(self, audio_path, flags):
+        """Second measurement of the same message from the recording; a failure never affects the text result."""
+        try:
+            if self._voice is None:
+                from .voice_affect import VoiceAffect
+                self._voice = VoiceAffect()
+            from .voice_affect import VOICE_SIGMA
+            voice = self._voice.analyse(audio_path)
+        except Exception as error:
+            flags.append("voice_processing_failed")
+            return {"status": "failed", "error_type": type(error).__name__, "error": str(error)}
+        gains = self._kalman_step(voice["observation"], VOICE_SIGMA, voice["noise"], new_message=False)
+        reading = [max(-1.0, min(1.0, v)) for v in voice["observation"]]
+        return {
+            "status": "processed",
+            "voice_only": {**{d: round(v, 4) for d, v in zip(DIMENSIONS, reading)},
+                           "label": derive_label(*voice["observation"])},
+            "predicted_emotion": voice["predicted_emotion"],
+            "emotion_probabilities": voice["probabilities"],
+            "noise_factor": [round(n, 2) for n in voice["noise"]],
+            "message_weight": [round(g, 3) for g in gains],
+            "acoustics": voice["acoustics"],
+        }
+
+    def update(self, text, raw, audio_path=None):
+        flags = list(raw.get("flags", []))
         word_count = len(text.split())
         raw_values = [raw[f"raw_{d}"] for d in DIMENSIONS]
         # The state stays unclipped so strong evidence is not lost; only the reported values are clipped.
         observation = [value / scale for value, scale in zip(raw_values, SCALE)]
 
-        gains = self._kalman_step(observation, self._message_noise(word_count, flags))
+        noise = self._message_noise(word_count, flags)
+        gains = self._kalman_step(observation, SIGMA, (noise, noise, noise))
+        voice = self._voice_step(audio_path, flags) if audio_path else None
+        voice_noise = voice["noise_factor"] if voice and voice["status"] == "processed" else None
         self.message_count += 1
 
         valence, activity, dominance = self.state
         label = derive_label(valence, activity, dominance)
         probs = label_probabilities(valence, activity, dominance, *(math.sqrt(v) for v in self.variance))
-        confidence = self._cap_confidence(probs[label], word_count, flags)
+        confidence = self._cap_confidence(probs[label], word_count, flags, voice_noise)
 
         reported = [max(-1.0, min(1.0, value)) for value in self.state]
         self.history.append(dict(zip(DIMENSIONS, reported)))
+        details_voice = {"voice": voice} if voice else {}
         return {
             "valence": round(reported[0], 4),
             "activity": round(reported[1], 4),
@@ -127,5 +163,6 @@ class AffectiveState:
                 "word_count": word_count,
                 "message_weight": [round(g, 3) for g in gains],
                 "label_probabilities": {k: round(p, 3) for k, p in probs.items()},
+                **details_voice,
             },
         }

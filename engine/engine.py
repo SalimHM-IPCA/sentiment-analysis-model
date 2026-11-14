@@ -673,6 +673,7 @@ class Engine:
         state = self.affective_state.update(
             text,
             raw_estimate,
+            audio_path=audio_path,
         )
 
         flags = list(state.get("flags") or [])

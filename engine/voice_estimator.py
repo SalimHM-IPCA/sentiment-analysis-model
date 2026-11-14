@@ -56,18 +56,19 @@ class VoiceEstimator:
             raise ValueError("Expected six classes and 768 input features.")
         torch.set_num_threads(4)
         encoder = AutoModel(model=str(self.model_dir / "encoder"), hub="hf",
-                            device="cpu", disable_update=True)
+                            device="cpu", disable_update=True, disable_pbar=True, disable_log=True)
         encoder.model.eval()
         for parameter in encoder.model.parameters():
             parameter.requires_grad_(False)
         self._classifier = pipeline
         self._encoder = encoder
 
-    def estimate(self, audio_path):
+    @staticmethod
+    def load_audio(audio_path):
+        """Read a recording as validated 16 kHz mono float32 samples."""
         import numpy as np
         import soundfile as sf
         import librosa
-        import torch
 
         path = Path(audio_path).expanduser()
         if not path.is_file():
@@ -84,6 +85,19 @@ class VoiceEstimator:
             raise ValueError("Recording is silent or effectively silent.")
         if sample_rate != 16000:
             audio = librosa.resample(audio, orig_sr=sample_rate, target_sr=16000)
+        return audio
+
+    def estimate(self, audio_path):
+        result = self.estimate_audio(self.load_audio(audio_path))
+        result["recording"] = Path(audio_path).name
+        return result
+
+    def estimate_audio(self, audio):
+        """Emotion probabilities for 16 kHz mono float32 samples."""
+        import numpy as np
+        import torch
+
+        duration = len(audio) / 16000
         self._load()
         with torch.inference_mode():
             output = self._encoder.generate(input=audio, granularity="utterance",
@@ -97,7 +111,7 @@ class VoiceEstimator:
         order = np.argsort(-probabilities)
         labels = self._classifier.classes_
         return {
-            "status": "processed", "recording": path.name,
+            "status": "processed",
             "duration_seconds": round(duration, 3),
             "predicted_emotion": str(labels[order[0]]),
             "class_probabilities_uncalibrated": {

@@ -1,0 +1,132 @@
+{
+  "speaker_invariant": {
+    "features": [
+      "loudness_db",
+      "loudness_sd_db",
+      "pitch_sd_semitones",
+      "pitch_range_semitones",
+      "voiced_ratio"
+    ],
+    "alpha_search": [
+      {
+        "alpha": 0.1,
+        "dev_mae": 0.3973860003449939
+      },
+      {
+        "alpha": 1.0,
+        "dev_mae": 0.3973779139143585
+      },
+      {
+        "alpha": 10.0,
+        "dev_mae": 0.3972977148520508
+      },
+      {
+        "alpha": 100.0,
+        "dev_mae": 0.3966320850162832
+      }
+    ],
+    "selected_alpha": 100.0,
+    "scale": 0.8518834949586525,
+    "sigma_dev": 0.5643725328564315,
+    "dev_pearson": 0.443031796520486,
+    "test_pearson": 0.495825195715984,
+    "test_mae_rescaled": 0.4500400563214622,
+    "speaker_pitch_vs_residual_corr": 0.0253409523098963,
+    "residual_corr_with_emotion2vec": 0.7201768087512359
+  },
+  "with_absolute_pitch": {
+    "features": [
+      "loudness_db",
+      "loudness_sd_db",
+      "pitch_sd_semitones",
+      "pitch_range_semitones",
+      "voiced_ratio",
+      "log_pitch_median"
+    ],
+    "alpha_search": [
+      {
+        "alpha": 0.1,
+        "dev_mae": 0.3927090839027297
+      },
+      {
+        "alpha": 1.0,
+        "dev_mae": 0.39270493258652633
+      },
+      {
+        "alpha": 10.0,
+        "dev_mae": 0.39266375743151904
+      },
+      {
+        "alpha": 100.0,
+        "dev_mae": 0.3923268465283518
+      }
+    ],
+    "selected_alpha": 100.0,
+    "scale": 0.9097514681878494,
+    "sigma_dev": 0.5167745761716542,
+    "dev_pearson": 0.4793838313111323,
+    "test_pearson": 0.5230639123698624,
+    "test_mae_rescaled": 0.41895425547891046,
+    "speaker_pitch_vs_residual_corr": 0.380659606446263,
+    "residual_corr_with_emotion2vec": 0.7292468642216952
+  },
+  "with_mfcc": {
+    "features": [
+      "loudness_db",
+      "loudness_sd_db",
+      "pitch_sd_semitones",
+      "pitch_range_semitones",
+      "voiced_ratio",
+      "mfcc2_mean",
+      "mfcc3_mean",
+      "mfcc4_mean",
+      "mfcc5_mean",
+      "mfcc6_mean",
+      "mfcc7_mean",
+      "mfcc8_mean",
+      "mfcc9_mean",
+      "mfcc10_mean",
+      "mfcc11_mean",
+      "mfcc12_mean",
+      "mfcc13_mean",
+      "mfcc2_sd",
+      "mfcc3_sd",
+      "mfcc4_sd",
+      "mfcc5_sd",
+      "mfcc6_sd",
+      "mfcc7_sd",
+      "mfcc8_sd",
+      "mfcc9_sd",
+      "mfcc10_sd",
+      "mfcc11_sd",
+      "mfcc12_sd",
+      "mfcc13_sd"
+    ],
+    "alpha_search": [
+      {
+        "alpha": 0.1,
+        "dev_mae": 0.4058671486367762
+      },
+      {
+        "alpha": 1.0,
+        "dev_mae": 0.40585846945417375
+      },
+      {
+        "alpha": 10.0,
+        "dev_mae": 0.40577378253230467
+      },
+      {
+        "alpha": 100.0,
+        "dev_mae": 0.4051595688100379
+      }
+    ],
+    "selected_alpha": 100.0,
+    "scale": 1.0728957896663684,
+    "sigma_dev": 0.4471628850217573,
+    "dev_pearson": 0.45490991834797123,
+    "test_pearson": 0.5206940239611543,
+    "test_mae_rescaled": 0.363573540715812,
+    "speaker_pitch_vs_residual_corr": 0.28597638427737615,
+    "residual_corr_with_emotion2vec": 0.7340102185515041
+  }
+}
