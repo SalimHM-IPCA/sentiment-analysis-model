@@ -305,3 +305,20 @@ python run_scenario.py scenarios/mandatory/M2_growing_frustration.json   # and t
 ```
 
 If Topic 1 ever retrains the model, run `calibrate_affect.py` and copy the printed values into the constants at the top of `engine/affective_state.py`.
+
+---
+
+## 15. AI log
+
+Tool: Claude (Anthropic), used through Claude Code. The AI proposed options and drafted code and text; design decisions were taken by the Topic 2 member after discussing alternatives.
+
+| Task | AI assistance | Verification |
+|---|---|---|
+| Project scope and Topic 1 review | Summarised the brief and reviewed the Topic 1 handover against it | Checked against the project guide |
+| v1 design (EMA α, labels, confidence) | Proposed options and drafted `affective_state.py` v1 | Contract tests, mandatory scenarios |
+| v1 threshold calibration | Analysed scenario outputs, proposed new thresholds | Re-ran all scenarios |
+| Review of the Topic 2/3 integration | Identified the confidence and label problems with probe messages and reworded scenarios | Re-ran with the real engine |
+| Held-out data analysis | Measured output range, model error, Gaussian fit, length effect, dominance separation | Reproduced by `calibrate_affect.py` |
+| v2 design | Proposed and compared options: map scaling, label rules (incl. fear), confidence definition, confidence-weighted EMA vs Kalman, clipping, change detection | Simulations on scenarios, probes and extra conversations |
+| v2 implementation | Drafted `affective_state.py` v2 and `calibrate_affect.py` | Contract tests, all 8 scenarios, probe set, extra conversations |
+| Documentation | Drafted this handover and the messages to Topics 1 and 3 | Numbers re-checked against the final code |
