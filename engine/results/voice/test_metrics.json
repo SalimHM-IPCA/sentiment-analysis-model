@@ -1,0 +1,122 @@
+{
+  "test": {
+    "accuracy": 0.7180385288966725,
+    "balanced_accuracy": 0.7216336557653923,
+    "macro_f1": 0.7174421796235214
+  },
+  "majority_baseline": {
+    "accuracy": 0.17075306479859895,
+    "balanced_accuracy": 0.16666666666666666,
+    "macro_f1": 0.04861630516080778
+  },
+  "labels": [
+    "anger",
+    "disgust",
+    "fear",
+    "happiness",
+    "neutral",
+    "sadness"
+  ],
+  "confusion_matrix_rows_true_columns_predicted": [
+    [
+      168,
+      11,
+      8,
+      6,
+      1,
+      1
+    ],
+    [
+      15,
+      107,
+      26,
+      17,
+      2,
+      28
+    ],
+    [
+      8,
+      3,
+      137,
+      10,
+      8,
+      29
+    ],
+    [
+      18,
+      7,
+      18,
+      133,
+      14,
+      5
+    ],
+    [
+      1,
+      0,
+      1,
+      11,
+      145,
+      9
+    ],
+    [
+      1,
+      19,
+      25,
+      2,
+      18,
+      130
+    ]
+  ],
+  "classification_report": {
+    "anger": {
+      "precision": 0.7962085308056872,
+      "recall": 0.8615384615384616,
+      "f1-score": 0.8275862068965517,
+      "support": 195.0
+    },
+    "disgust": {
+      "precision": 0.7278911564625851,
+      "recall": 0.5487179487179488,
+      "f1-score": 0.6257309941520468,
+      "support": 195.0
+    },
+    "fear": {
+      "precision": 0.6372093023255814,
+      "recall": 0.7025641025641025,
+      "f1-score": 0.6682926829268293,
+      "support": 195.0
+    },
+    "happiness": {
+      "precision": 0.7430167597765364,
+      "recall": 0.6820512820512821,
+      "f1-score": 0.7112299465240641,
+      "support": 195.0
+    },
+    "neutral": {
+      "precision": 0.7712765957446809,
+      "recall": 0.8682634730538922,
+      "f1-score": 0.8169014084507042,
+      "support": 167.0
+    },
+    "sadness": {
+      "precision": 0.6435643564356436,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.654911838790932,
+      "support": 195.0
+    },
+    "accuracy": 0.7180385288966725,
+    "macro avg": {
+      "precision": 0.7198611169251191,
+      "recall": 0.7216336557653923,
+      "f1-score": 0.7174421796235214,
+      "support": 1142.0
+    },
+    "weighted avg": {
+      "precision": 0.7186004922255151,
+      "recall": 0.7180385288966725,
+      "f1-score": 0.7150035995822245,
+      "support": 1142.0
+    }
+  },
+  "scope": "Unseen CREMA-D actors, acted speech; not real customer-service validation."
+}

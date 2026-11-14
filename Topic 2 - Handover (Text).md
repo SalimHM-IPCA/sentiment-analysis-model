@@ -71,7 +71,7 @@ The interface draws valence (x) and activity (y); if the engine also returns `do
 
 ## 5. Data used for calibration
 
-All Topic 2 constants come from the **981 held-out EmoBank test sentences** written by `train_regressor.py` to `engine/training_output/test_predictions.csv` (true and predicted V/A/D for sentences never used to train the regressor).
+All Topic 2 constants come from the **981 held-out EmoBank test sentences** written by `train_regressor.py` to `engine/results/text/test_predictions.csv` (true and predicted V/A/D for sentences never used to train the regressor).
 
 EmoBank scores (1–5) are normalised by Topic 1 as `(score − 3) / 2`. Topic 2 does not retrain anything; it only measures how the trained model behaves.
 

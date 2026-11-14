@@ -1,0 +1,121 @@
+{
+  "test": {
+    "accuracy": 0.7180385288966725,
+    "balanced_accuracy": 0.7214903526280771,
+    "macro_f1": 0.7172388876032416
+  },
+  "labels": [
+    "anger",
+    "disgust",
+    "fear",
+    "happiness",
+    "neutral",
+    "sadness"
+  ],
+  "confusion_matrix_rows_true_columns_predicted": [
+    [
+      172,
+      11,
+      2,
+      7,
+      1,
+      2
+    ],
+    [
+      14,
+      112,
+      23,
+      14,
+      3,
+      29
+    ],
+    [
+      7,
+      3,
+      141,
+      14,
+      6,
+      24
+    ],
+    [
+      19,
+      9,
+      23,
+      123,
+      16,
+      5
+    ],
+    [
+      1,
+      1,
+      2,
+      11,
+      144,
+      8
+    ],
+    [
+      2,
+      21,
+      28,
+      1,
+      15,
+      128
+    ]
+  ],
+  "classification_report": {
+    "anger": {
+      "precision": 0.8,
+      "recall": 0.882051282051282,
+      "f1-score": 0.8390243902439024,
+      "support": 195.0
+    },
+    "disgust": {
+      "precision": 0.7133757961783439,
+      "recall": 0.5743589743589743,
+      "f1-score": 0.6363636363636364,
+      "support": 195.0
+    },
+    "fear": {
+      "precision": 0.6438356164383562,
+      "recall": 0.7230769230769231,
+      "f1-score": 0.6811594202898551,
+      "support": 195.0
+    },
+    "happiness": {
+      "precision": 0.7235294117647059,
+      "recall": 0.6307692307692307,
+      "f1-score": 0.673972602739726,
+      "support": 195.0
+    },
+    "neutral": {
+      "precision": 0.7783783783783784,
+      "recall": 0.8622754491017964,
+      "f1-score": 0.8181818181818182,
+      "support": 167.0
+    },
+    "sadness": {
+      "precision": 0.6530612244897959,
+      "recall": 0.6564102564102564,
+      "f1-score": 0.6547314578005116,
+      "support": 195.0
+    },
+    "accuracy": 0.7180385288966725,
+    "macro avg": {
+      "precision": 0.71869673787493,
+      "recall": 0.7214903526280771,
+      "f1-score": 0.7172388876032416,
+      "support": 1142.0
+    },
+    "weighted avg": {
+      "precision": 0.7172334402093464,
+      "recall": 0.7180385288966725,
+      "f1-score": 0.7147639295855532,
+      "support": 1142.0
+    }
+  },
+  "logistic_regression_test": {
+    "accuracy": 0.7180385288966725,
+    "balanced_accuracy": 0.7216336557653923,
+    "macro_f1": 0.7174421796235214
+  }
+}

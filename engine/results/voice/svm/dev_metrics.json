@@ -1,0 +1,51 @@
+{
+  "selection": "Highest development macro F1. Ties keep the first candidate.",
+  "selected_C": 10.0,
+  "selected_gamma": "scale",
+  "dev_macro_f1": 0.6027379741382602,
+  "candidates": [
+    {
+      "C": 0.1,
+      "gamma": "scale",
+      "accuracy": 0.4895470383275261,
+      "balanced_accuracy": 0.4963151927437642,
+      "macro_f1": 0.4723324143007818
+    },
+    {
+      "C": 0.1,
+      "gamma": 0.003,
+      "accuracy": 0.397212543554007,
+      "balanced_accuracy": 0.4078798185941043,
+      "macro_f1": 0.3802985202608211
+    },
+    {
+      "C": 1.0,
+      "gamma": "scale",
+      "accuracy": 0.6001742160278746,
+      "balanced_accuracy": 0.606859410430839,
+      "macro_f1": 0.593803033237763
+    },
+    {
+      "C": 1.0,
+      "gamma": 0.003,
+      "accuracy": 0.5905923344947736,
+      "balanced_accuracy": 0.5963718820861678,
+      "macro_f1": 0.5848985605110205
+    },
+    {
+      "C": 10.0,
+      "gamma": "scale",
+      "accuracy": 0.6062717770034843,
+      "balanced_accuracy": 0.6119614512471655,
+      "macro_f1": 0.6027379741382602
+    },
+    {
+      "C": 10.0,
+      "gamma": 0.003,
+      "accuracy": 0.5940766550522648,
+      "balanced_accuracy": 0.5989229024943311,
+      "macro_f1": 0.5897267334779084
+    }
+  ],
+  "logistic_regression_dev_macro_f1": 0.6226165027211237
+}

@@ -59,11 +59,11 @@ def possible_sarcasm(text):
 class TextEstimator:
     def __init__(self, engine_dir=None):
         root = Path(engine_dir).resolve() if engine_dir else Path(__file__).resolve().parent
-        model_path = root / "emotion_model"
-        bundle_path = root / "training_output" / "regressor.joblib"
+        model_path = root / "models" / "text" / "encoder"
+        bundle_path = root / "models" / "text" / "regressor.joblib"
         if not model_path.is_dir() or not bundle_path.is_file():
             raise FileNotFoundError(
-                "Expected emotion_model/ and training_output/regressor.joblib "
+                "Expected models/text/encoder/ and models/text/regressor.joblib "
                 f"inside {root}. Keep the saved training files in place."
             )
         # Load only your own trusted training output: joblib uses pickle internally.
@@ -79,7 +79,7 @@ class TextEstimator:
         if self.regressor.n_features_in_ != 768:
             raise ValueError("Expected a Ridge regressor with 768 input features.")
         if model_fingerprint(model_path) != self.metadata.get("model_sha256"):
-            raise ValueError("The encoder differs from the one used for training. Restore the original emotion_model folder.")
+            raise ValueError("The encoder differs from the one used for training. Restore the original models/text/encoder folder.")
         os.environ["HF_HUB_OFFLINE"] = "1"
         os.environ["TRANSFORMERS_OFFLINE"] = "1"
         os.environ["TOKENIZERS_PARALLELISM"] = "false"

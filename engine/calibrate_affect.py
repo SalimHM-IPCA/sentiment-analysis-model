@@ -9,7 +9,7 @@ import numpy as np
 DIMS = ("valence", "activity", "dominance")
 LENGTH_BINS = (2, 5, 10)
 
-rows = list(csv.DictReader((Path(__file__).resolve().parent / "training_output" / "test_predictions.csv")
+rows = list(csv.DictReader((Path(__file__).resolve().parent / "results" / "text" / "test_predictions.csv")
                            .open(encoding="utf-8")))
 pred = np.array([[float(r[f"pred_{d}"]) for d in DIMS] for r in rows])
 true = np.array([[float(r[f"true_{d}"]) for d in DIMS] for r in rows])

@@ -1,0 +1,12 @@
+{
+  "model_id": "emotion2vec/emotion2vec_base",
+  "revision": "0c9a3152734f9d7a7a05b4ee6bfb3c109d288664",
+  "sha256": {
+    "encoder/README.md": "fb643fa2195dcaefcc4cfacdaadcc2860300e1b2022f710548bfed9a559ebcd3",
+    "encoder/config.yaml": "844e4728d4ca9ab355a2f77b905c7a2e74fe21ed3294444e88d1e52fd874f4ef",
+    "encoder/configuration.json": "bf0717f50c1e4a016902f7a24b68f3023a1fc0fb539658a6072d61d6681fc57f",
+    "encoder/emotion2vec_base.pt": "4f14ddf7ba394bcafdd4bff6ae0f24ab2e4134260d4dd42c58ea791a201b02dd",
+    "voice_classifier.joblib": "bdd0cf70e2dd843b70187eb310b8f48489f4e4f6db0ba1e5632e0440b1561f7f"
+  },
+  "scope": "Separate voice classification preview; no V/A fusion"
+}

@@ -129,12 +129,13 @@ def main():
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
-    data_path = ENGINE / "data" / "emobank.csv"
-    model_path = ENGINE / "emotion_model"
+    data_path = ENGINE / "data" / "text" / "emobank.csv"
+    model_path = ENGINE / "models" / "text" / "encoder"
     if not data_path.is_file() or not model_path.is_dir():
-        raise FileNotFoundError("Need engine/data/emobank.csv and engine/emotion_model")
-    output = ENGINE / "training_output"
-    output.mkdir(exist_ok=True)
+        raise FileNotFoundError("Need engine/data/text/emobank.csv and engine/models/text/encoder")
+    output = ENGINE / "results" / "text"
+    output.mkdir(parents=True, exist_ok=True)
+    cache = ENGINE / "data" / "text" / "embedding_cache"
     rows, audit = load_data(data_path)
     save_json(output / "data_audit.json", audit)
     print("Split counts:", audit["used_counts"], flush=True)
@@ -145,7 +146,7 @@ def main():
     model = SentenceTransformer(str(model_path), device="cpu", local_files_only=True)
     model.max_seq_length = 128
     fingerprint = model_fingerprint(model_path)
-    x = {s: embeddings(model, rows[s], s, ENGINE / "embedding_cache", fingerprint)
+    x = {s: embeddings(model, rows[s], s, cache, fingerprint)
          for s in ("train", "dev")}
     y = {s: targets(rows[s]) for s in rows}
     candidates = []
@@ -159,7 +160,7 @@ def main():
         if result["mean_mae"] < best_mae:
             best, best_mae = regressor, result["mean_mae"]
     # Evaluate the held-out test set only after alpha selection.
-    test_x = embeddings(model, rows["test"], "test", ENGINE / "embedding_cache", fingerprint)
+    test_x = embeddings(model, rows["test"], "test", cache, fingerprint)
     prediction = np.clip(best.predict(test_x), -1, 1)
     baseline = np.tile(y["train"].mean(axis=0), (len(y["test"]), 1))
     metadata = {"encoder": "distilbert/distilbert-base-uncased + saved pooling",
@@ -171,7 +172,7 @@ def main():
         "versions": {p: importlib.metadata.version(p) for p in
                      ("numpy", "scikit-learn", "sentence-transformers", "torch", "joblib")}}
     bundle = {"regressor": best, "metadata": metadata}
-    joblib.dump(bundle, output / "regressor.joblib")
+    joblib.dump(bundle, ENGINE / "models" / "text" / "regressor.joblib")
     report = {"metadata": metadata, "data_audit": audit, "alpha_search": candidates,
               "test": metrics(y["test"], prediction),
               "test_train_mean_baseline": metrics(y["test"], baseline),
@@ -185,7 +186,7 @@ def main():
             writer.writerow([row["id"], row["text"], *actual, *pred])
     print("\nTest results:", json.dumps(report["test"], indent=2), flush=True)
     print("Mean baseline:", json.dumps(report["test_train_mean_baseline"], indent=2), flush=True)
-    print("Training complete. Saved to:", output, flush=True)
+    print("Training complete. Model in models/text/, reports in", output, flush=True)
 
 
 if __name__ == "__main__":

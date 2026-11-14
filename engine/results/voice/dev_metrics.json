@@ -1,0 +1,49 @@
+{
+  "selection": "highest development macro F1; ties favour smaller C",
+  "candidates": [
+    {
+      "C": 0.01,
+      "accuracy": 0.6254355400696864,
+      "balanced_accuracy": 0.6315192743764172,
+      "macro_f1": 0.6226165027211237
+    },
+    {
+      "C": 0.1,
+      "accuracy": 0.6245644599303136,
+      "balanced_accuracy": 0.6299603174603174,
+      "macro_f1": 0.6224155167366702
+    },
+    {
+      "C": 1.0,
+      "accuracy": 0.5975609756097561,
+      "balanced_accuracy": 0.6009070294784581,
+      "macro_f1": 0.5959149374603184
+    },
+    {
+      "C": 10.0,
+      "accuracy": 0.587979094076655,
+      "balanced_accuracy": 0.5911281179138322,
+      "macro_f1": 0.5861682150896396
+    }
+  ],
+  "selected_C": 0.01,
+  "dev_majority_baseline": {
+    "accuracy": 0.17073170731707318,
+    "balanced_accuracy": 0.16666666666666666,
+    "macro_f1": 0.04861111111111111
+  },
+  "versions": {
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.1",
+    "torch": "2.15.0",
+    "torchaudio": "2.11.1",
+    "funasr": "1.4.22",
+    "joblib": "1.6.0"
+  },
+  "notes": [
+    "Encoder frozen; scaler and classifier fitted on training actors only.",
+    "No refit on development data. Test labels not used for selection.",
+    "Filename labels describe acted emotions, not measured V/A.",
+    "Classifier probabilities are not calibrated confidence."
+  ]
+}

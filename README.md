@@ -10,14 +10,15 @@ pip install -r requirements.txt
 
 On Linux, if tkinter is missing: `sudo apt install python3-tk`.
 
-## Emotion model weights
+## Model weights
 
-The file `model.safetensors` (253 MB) is too large for GitHub, so it is not in this repository.
-Download it from [Google Drive](https://drive.google.com/drive/folders/1mXXYlbqNvOcEIQl74V8zCEJdlOqwpjTS?usp=sharing)
-and place it in `engine/emotion_model/`:
+Two model files are too large for GitHub, so they are not in this repository.
+Download them from [Google Drive](https://drive.google.com/drive/folders/1mXXYlbqNvOcEIQl74V8zCEJdlOqwpjTS?usp=sharing)
+and place them here:
 
 ```
-engine/emotion_model/model.safetensors
+engine/models/text/encoder/model.safetensors          (253 MB, text model)
+engine/models/voice/encoder/emotion2vec_base.pt       (1.07 GB, voice model)
 ```
 
 ## Run

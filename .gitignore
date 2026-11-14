@@ -5,12 +5,12 @@ __MACOSX/
 .venv/
 venv/
 
-engine/embedding_cache/
+engine/data/text/embedding_cache/
 
 logs/*
 !logs/README.txt
 
-# Emotion model weights (253 MB) exceed GitHub's 100 MB file limit.
-# Download model.safetensors from Google Drive and place it in engine/emotion_model/:
+# Model weights too large for GitHub (100 MB file limit), shared via Google Drive:
 # https://drive.google.com/drive/folders/1mXXYlbqNvOcEIQl74V8zCEJdlOqwpjTS?usp=sharing
-engine/emotion_model/model.safetensors
+engine/models/text/encoder/model.safetensors
+engine/models/voice/encoder/emotion2vec_base.pt
