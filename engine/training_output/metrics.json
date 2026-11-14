@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "encoder": "distilbert/distilbert-base-uncased + saved pooling",
+    "model_sha256": "bc904323b4fe193af9906b6537151b7708b542187923e3ff23f3aec6741e27aa",
+    "dataset_sha256": "1ade4a4a453e880c0f39d0536d2b355e8a716e0cf88236c64cdb4d438cf9605b",
+    "targets": [
+      "valence",
+      "activity"
+    ],
+    "normalisation": "(EmoBank score - 3) / 2",
+    "max_seq_length": 128,
+    "normalize_embeddings": false,
+    "selected_alpha": 100.0,
+    "prediction_clip": [
+      -1,
+      1
+    ],
+    "training": "frozen encoder; Ridge fit on train only; alpha chosen using dev mean MAE",
+    "versions": {
+      "numpy": "2.4.2",
+      "scikit-learn": "1.8.0",
+      "sentence-transformers": "6.2.0",
+      "torch": "2.15.0",
+      "joblib": "1.5.3"
+    }
+  },
+  "data_audit": {
+    "original_counts": {
+      "train": 8062,
+      "dev": 1000,
+      "test": 1000
+    },
+    "used_counts": {
+      "train": 8062,
+      "dev": 975,
+      "test": 981
+    },
+    "dropped_cross_split_duplicates": [
+      {
+        "id": "110CYL069_3559_3569",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "110CYL070_1325_1335",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "110CYL200_72_82",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "112C-L012_70_76",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "112C-L013_2395_2405",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "113CWL018_42_48",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "115CVL037_2782_2792",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "118CWL048_61_71",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "Ant_Robot_53560_53570",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "Anti-Terrorist_5315_5332",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "Anti-Terrorist_5374_5394",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "Fermentation_Eminent-Domain_12390_12529",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "NYTnewswire9_4647_4648",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "Nathans_Bylichka_7397_7402",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "SemEval_26",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "SemEval_67",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "aspca1_522_534",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "captured_moments_20177_20182",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "captured_moments_20852_20857",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "detroit_13349_13361",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "easy_money_1946_1962",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "easy_money_2236_2242",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "hotel-california_29537_29552",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "hotel-california_33342_33369",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "united1_121_131",
+        "split": "dev",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "110CYL070_1342_1371",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "110CYL200_2548_2558",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "112C-L016_1321_1331",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "114CUL059_1731_1735",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "115CVL037_38_48",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "116CUL034_72_82",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "117CWL008_1449_1499",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "119CWL041_39_64",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "Nathans_Bylichka_15350_15360",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "Nathans_Bylichka_26161_26167",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "SemEval_522",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "SemEval_60",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "SemEval_722",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "alumnifund1_462_479",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "cable_spool_fort_6705_6709",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "cable_spool_fort_98_103",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "captured_moments_28138_28149",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "hotel-california_29917_29928",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      },
+      {
+        "id": "hotel-california_4734_4742",
+        "split": "test",
+        "reason": "exact stripped text occurs in earlier split"
+      }
+    ],
+    "policy": "train > dev > test; strip-only exact text matching; retain within-split repetitions"
+  },
+  "alpha_search": [
+    {
+      "alpha": 0.1,
+      "dev": {
+        "valence": {
+          "mae": 0.09203165403849041,
+          "pearson": 0.6969132182258769
+        },
+        "activity": {
+          "mae": 0.08472486178981953,
+          "pearson": 0.5128292224472655
+        },
+        "mean_mae": 0.08837825791415499
+      }
+    },
+    {
+      "alpha": 1.0,
+      "dev": {
+        "valence": {
+          "mae": 0.0916525884166742,
+          "pearson": 0.6991937451063759
+        },
+        "activity": {
+          "mae": 0.0841565846493611,
+          "pearson": 0.5175051154511162
+        },
+        "mean_mae": 0.08790458653301768
+      }
+    },
+    {
+      "alpha": 10.0,
+      "dev": {
+        "valence": {
+          "mae": 0.09055689482138708,
+          "pearson": 0.7038222609847408
+        },
+        "activity": {
+          "mae": 0.08209578759089496,
+          "pearson": 0.5358121917121385
+        },
+        "mean_mae": 0.08632634120614104
+      }
+    },
+    {
+      "alpha": 100.0,
+      "dev": {
+        "valence": {
+          "mae": 0.09046293667325606,
+          "pearson": 0.6902637024937366
+        },
+        "activity": {
+          "mae": 0.08140607380141052,
+          "pearson": 0.5453917728260157
+        },
+        "mean_mae": 0.08593450523733329
+      }
+    }
+  ],
+  "test": {
+    "valence": {
+      "mae": 0.09322005506927693,
+      "pearson": 0.6860942380144918
+    },
+    "activity": {
+      "mae": 0.0829647283322889,
+      "pearson": 0.4860211093007359
+    },
+    "mean_mae": 0.08809239170078287
+  },
+  "test_train_mean_baseline": {
+    "valence": {
+      "mae": 0.12241028309905068,
+      "pearson": null
+    },
+    "activity": {
+      "mae": 0.09451735859019209,
+      "pearson": null
+    },
+    "mean_mae": 0.10846382084462092
+  },
+  "note": "Metrics use [-1,1] targets and clipped predictions. Pearson null means undefined. Test must not be used to tune alpha."
+}

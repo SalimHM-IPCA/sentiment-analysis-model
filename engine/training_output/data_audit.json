@@ -1,0 +1,235 @@
+{
+  "original_counts": {
+    "train": 8062,
+    "dev": 1000,
+    "test": 1000
+  },
+  "used_counts": {
+    "train": 8062,
+    "dev": 975,
+    "test": 981
+  },
+  "dropped_cross_split_duplicates": [
+    {
+      "id": "110CYL069_3559_3569",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "110CYL070_1325_1335",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "110CYL200_72_82",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "112C-L012_70_76",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "112C-L013_2395_2405",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "113CWL018_42_48",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "115CVL037_2782_2792",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "118CWL048_61_71",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "Ant_Robot_53560_53570",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "Anti-Terrorist_5315_5332",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "Anti-Terrorist_5374_5394",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "Fermentation_Eminent-Domain_12390_12529",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "NYTnewswire9_4647_4648",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "Nathans_Bylichka_7397_7402",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "SemEval_26",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "SemEval_67",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "aspca1_522_534",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "captured_moments_20177_20182",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "captured_moments_20852_20857",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "detroit_13349_13361",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "easy_money_1946_1962",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "easy_money_2236_2242",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "hotel-california_29537_29552",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "hotel-california_33342_33369",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "united1_121_131",
+      "split": "dev",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "110CYL070_1342_1371",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "110CYL200_2548_2558",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "112C-L016_1321_1331",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "114CUL059_1731_1735",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "115CVL037_38_48",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "116CUL034_72_82",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "117CWL008_1449_1499",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "119CWL041_39_64",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "Nathans_Bylichka_15350_15360",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "Nathans_Bylichka_26161_26167",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "SemEval_522",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "SemEval_60",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "SemEval_722",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "alumnifund1_462_479",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "cable_spool_fort_6705_6709",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "cable_spool_fort_98_103",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "captured_moments_28138_28149",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "hotel-california_29917_29928",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    },
+    {
+      "id": "hotel-california_4734_4742",
+      "split": "test",
+      "reason": "exact stripped text occurs in earlier split"
+    }
+  ],
+  "policy": "train > dev > test; strip-only exact text matching; retain within-split repetitions"
+}
