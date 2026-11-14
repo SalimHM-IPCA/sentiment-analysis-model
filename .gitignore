@@ -6,6 +6,7 @@ __MACOSX/
 venv/
 
 engine/data/text/embedding_cache/
+engine/data/voice/audio/
 
 logs/*
 !logs/README.txt
